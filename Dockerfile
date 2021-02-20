@@ -4,7 +4,7 @@ LABEL Maintainer="Lucas Galvão Nunes <contato@lucasgnunes.dev>" \
 
 # Install packages and remove default server definition
 RUN apk --no-cache add php8=8.0.2-r0 php8-fpm php8-common php8-opcache php8-mysqli php8-json \
-    php8-openssl php8-curl php8-soap php8-zlib php8-xml php8-phar php8-intl php8-dom php8-xmlreader php8-ctype php8-session php8-simplexml \
+    php8-openssl php8-pdo php8-pdo_mysql php8-curl php8-soap php8-zlib php8-xml php8-phar php8-intl php8-dom php8-xmlreader php8-ctype php8-session php8-simplexml \
     php8-mbstring php8-gd nginx supervisor curl php8-exif php8-zip php8-tokenizer php8-fileinfo php8-iconv php8-soap tzdata htop mysql-client \
     php8-pecl-imagick php8-pecl-redis php8-pecl-xdebug && \
     rm /etc/nginx/conf.d/default.conf
