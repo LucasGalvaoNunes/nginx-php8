@@ -1,16 +1,16 @@
-FROM alpine:3.13
+FROM alpine:latest
 LABEL Maintainer="Lucas Galvão Nunes <contato@lucasgnunes.dev>" \
       Description="Container limpo com Nginx 1.18 e PHP-FPM 8 baseado no Alpine Linux."
 
 # Install packages and remove default server definition
-RUN apk --no-cache add php8=8.0.2-r0 php8-fpm php8-common php8-opcache php8-mysqli php8-json \
-    php8-openssl php8-pdo php8-pdo_mysql php8-curl php8-soap php8-zlib php8-xml php8-phar php8-intl php8-dom php8-xmlreader php8-ctype php8-session php8-simplexml \
-    php8-mbstring php8-gd nginx supervisor curl php8-exif php8-zip php8-tokenizer php8-fileinfo php8-iconv php8-soap tzdata htop mysql-client \
-    php8-pecl-imagick php8-pecl-redis php8-pecl-xdebug && \
+RUN apk --no-cache add php82-fpm php82-common php82-opcache php82-mysqli php82-json \
+    php82-openssl php82-pdo php82-pdo_mysql php82-curl php82-soap php82-zlib php82-xml php82-phar php82-intl php82-dom php82-xmlreader php82-ctype php82-session php82-simplexml \
+    php82-mbstring php82-gd nginx supervisor curl php82-exif php82-zip php82-tokenizer php82-fileinfo php82-iconv php82-soap tzdata htop mysql-client \
+    php82-pecl-imagick php82-pecl-redis php82-pecl-xdebug && \
     rm /etc/nginx/conf.d/default.conf
 
 # Symling php8 => php
-RUN ln -s /usr/bin/php8 /usr/bin/php
+RUN ln -s /usr/bin/php82 /usr/bin/php
 
 # Install PHP tools
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
@@ -20,8 +20,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 COPY config/nginx.conf /etc/nginx/nginx.conf
 
 # Configure PHP-FPM
-COPY config/fpm-pool.conf /etc/php8/php-fpm.d/www.conf
-COPY config/php.ini /etc/php8/conf.d/custom.ini
+COPY config/fpm-pool.conf /etc/php82/php-fpm.d/www.conf
+COPY config/php.ini /etc/php82/conf.d/custom.ini
 
 # Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
